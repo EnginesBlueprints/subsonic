@@ -28,7 +28,7 @@
         "url": "http://www.gnu.org/copyleft/gpl.html"
       }
     },
-    "timestamp": "2018-03-02T12:55:00+11:00"
+    "timestamp": "2018-03-02T13:37:09+11:00"
   },
   "software": {
     "base": {
@@ -72,8 +72,8 @@
     ],
     "installed_packages": [
       {
-        "name": "subsonic-6.1.1-standalone.tar.gz",
-        "source_url": "https://s3-eu-west-1.amazonaws.com/subsonic-public/download/subsonic-6.1.1-standalone.tar.gz",
+        "name": "subsonic-6.1.3-standalone.tar.gz",
+        "source_url": "https://s3-eu-west-1.amazonaws.com/subsonic-public/download/subsonic-6.1.3-standalone.tar.gz",
         "destination": "./",
         "extraction_command": "tar -xpzf"
       }
