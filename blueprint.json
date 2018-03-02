@@ -28,7 +28,7 @@
         "url": "http://www.gnu.org/copyleft/gpl.html"
       }
     },
-    "timestamp": "2017-06-12T00:27:36+00:00"
+    "timestamp": "2018-03-02T12:55:00+11:00"
   },
   "software": {
     "base": {
@@ -36,7 +36,7 @@
       "framework": "openjdk8",
       "deployment_type": "web",
       "http_protocol": "http_and_https",
-      "framework_port_override": 8000,
+      "framework_port_override": 4040,
       "memory": {
         "required": 256,
         "recommended": 385
@@ -46,7 +46,7 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "#!/bin/bash\r\n\r\ncd /home/app/\r\njava_mem=`expr $Memory - 20`\r\n#PULSE_SERVER=`netstat -nr |grep -e ^0.0| awk '{print $2}'`\r\n#export PULSE_SERVER\r\nif ! test -h /home/fs/subsonic/home/transcode/ffmpeg\r\n then\r\n mkdir -p /home/fs/subsonic/home/transcode\r\n ln -fs /usr/bin/ffmpeg  /home/fs/subsonic/home/transcode/\r\n ln -fs /usr/bin/lame //home/fs/subsonic/home/transcode/\r\nfi\r\n\r\njava -Xmx${java_mem}m \\\r\n  -Dsubsonic.home=/home/fs/subsonic/home/ \\\r\n  -Dsubsonic.host=0.0.0.0 \\\r\n  -Dsubsonic.port=4040 \\\r\n  -Dsubsonic.httpsPort=0 \\\r\n  -Dsubsonic.contextPath=/ \\\r\n  -Dsubsonic.defaultMusicFolder=/home/fs/subsonic/music \\\r\n  -Dsubsonic.defaultPodcastFolder=/home/fs/subsonic/podcast \\\r\n  -Dsubsonic.defaultPlaylistFolder=/home/fs/subsonic/playlist \\\r\n  -Djava.awt.headless=true \\\r\n  -verbose:gc \\\r\n  -jar subsonic-booter-jar-with-dependencies.jar > /var/log/subsonic.log 2>&1 &\r\ntouch /engines/var/run/flags/startup_complete\r\nPID_FILE=/tmp/subsonic.pid\r\nexport PID_FILE\r\n. /home/trap.sh\r\n\r\nwhile test 1 -ne 2\r\ndo\r\n sleep 200\r\ndone\r\nrm /engines/var/run/flags/startup_complete\r\nexit"
+        "content": "#!/bin/bash\r\nPID_FILE=/tmp/subsonic.pid\r\nexport PID_FILE\r\n. /home/engines/functions/trap.sh\r\ncd /home/app/\r\njava_mem=`expr $Memory - 20`\r\n#PULSE_SERVER=`netstat -nr |grep -e ^0.0| awk '{print $2}'`\r\n#export PULSE_SERVER\r\nif ! test -h /home/fs/subsonic/home/transcode/ffmpeg\r\n then\r\n mkdir -p /home/fs/subsonic/home/transcode\r\n ln -fs /usr/bin/ffmpeg  /home/fs/subsonic/home/transcode/\r\n ln -fs /usr/bin/lame /home/fs/subsonic/home/transcode/\r\nfi\r\n\r\njava -Xmx${java_mem}m \\\r\n  -Dsubsonic.home=/home/fs/subsonic/home/ \\\r\n  -Dsubsonic.host=0.0.0.0 \\\r\n  -Dsubsonic.port=4040 \\\r\n  -Dsubsonic.httpsPort=0 \\\r\n  -Dsubsonic.contextPath=/ \\\r\n  -Dsubsonic.defaultMusicFolder=/home/fs/subsonic/music \\\r\n  -Dsubsonic.defaultPodcastFolder=/home/fs/subsonic/podcast \\\r\n  -Dsubsonic.defaultPlaylistFolder=/home/fs/subsonic/playlist \\\r\n  -Djava.awt.headless=true \\\r\n  -verbose:gc \\\r\n  -jar subsonic-booter-jar-with-dependencies.jar > /var/log/subsonic.log 2>&1 &\r\n\r\n\r\nstartup_complete\r\nwhile ! test -f /home/engines/run/flags/sig_term -o -f /home/engines/run/flags/sig_quit\r\ndo\r\n sleep 20 &\r\n wait\r\ndone\r\nshutdown_complete\r\n\r\nexit"
       },
       "install": {
         "language": "sh",
