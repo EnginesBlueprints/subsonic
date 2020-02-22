@@ -28,14 +28,14 @@
         "url": "http://www.gnu.org/copyleft/gpl.html"
       }
     },
-    "timestamp": "2020-02-22T11:19:41+11:00"
+    "timestamp": "2020-02-22T12:01:11+11:00"
   },
   "software": {
     "base": {
       "name": "subsonic",
       "framework": "openjdk8",
       "deployment_type": "web",
-      "http_protocol": "http_and_https",
+      "http_protocol": "https_and_http",
       "framework_port_override": 4040,
       "memory": {
         "required": 256,
