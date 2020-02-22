@@ -28,7 +28,7 @@
         "url": "http://www.gnu.org/copyleft/gpl.html"
       }
     },
-    "timestamp": "2019-04-08T17:50:20+10:00"
+    "timestamp": "2020-02-22T11:19:41+11:00"
   },
   "software": {
     "base": {
@@ -72,9 +72,9 @@
     ],
     "installed_packages": [
       {
-        "name": "subsonic-6.1.5-standalone.tar.gz",
+        "name": "subsonic-6.1.6-standalone.tar.gz",
         "download_type": "http(s)",
-        "source_url": "https://s3-eu-west-1.amazonaws.com/subsonic-public/download/subsonic-6.1.5-standalone.tar.gz",
+        "source_url": "https://s3-eu-west-1.amazonaws.com/subsonic-public/download/subsonic-6.1.6-standalone.tar.gz",
         "destination": "./",
         "extraction_command": "tar -xpzf"
       }
@@ -84,12 +84,14 @@
         "publisher_namespace": "EnginesSystem",
         "type_path": "filesystem/local/filesystem",
         "variables": {
+          "service_name": "_Engines_Builder(engine_name)",
+          "volume_src": " ",
           "engine_path": "subsonic",
           "permissions": "rw",
-          "volume_src": " ",
-          "service_name": "_Engines_Builder(engine_name)",
+          "user": "_Engines_Builder(data_uid)",
           "group": "_Engines_Builder(data_gid)",
-          "user": "_Engines_Builder(data_uid)"
+          "fw_user": "_Engines_Builder(cont_user_id)",
+          "exclude_from_backup": "false"
         }
       }
     ],
